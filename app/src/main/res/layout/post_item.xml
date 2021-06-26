@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:weightSum="5"
+    app:layout_dodgeInsetEdges="all">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1">
+
+        <ImageView
+            android:id="@+id/post_img"
+            android:layout_width="115dp"
+            android:layout_height="134dp"
+            android:layout_gravity="start" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.6"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/post_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/post_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/post_nom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/post_prenom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="102dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/email_ic"
+                android:layout_width="54dp"
+                android:layout_height="58dp"
+                android:layout_gravity="bottom"
+                android:src="@drawable/ic_baseline_email" />
+
+            <ImageButton
+                android:id="@+id/call_ic"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="bottom"
+
+                android:src="@drawable/ic_baseline_local_phone_24" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_weight="0.3"
+        android:gravity="end"
+        android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/post_category"
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:gravity="center"
+                android:text="Favoris" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <ImageButton
+                    android:id="@+id/favouritebtn_checked"
+                    android:layout_width="48dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/fav"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/favouritebtn"
+                    app:layout_constraintEnd_toEndOf="@+id/favouritebtn" />
+
+            <ImageButton
+                    android:id="@+id/deleteItembtn"
+                    android:layout_width="56dp"
+                    android:layout_height="41dp"
+                    android:src="@drawable/trash"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    android:layout_marginStart="4dp" />
+            <ImageButton
+                    android:id="@+id/favouritebtn"
+                    android:layout_width="56dp"
+                    android:layout_height="41dp"
+                    android:src="@drawable/ic_baseline_favorite_24"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    android:layout_marginStart="4dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

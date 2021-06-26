@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back"
+    android:padding="30dp"
+    android:elevation="5dp"
+    tools:context=".ui.activities.LoginActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/title_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/app_name"
+            android:elevation="20sp"
+            android:layout_marginVertical="10dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/orange"
+            android:fontFamily="@font/lemon"
+            />
+      <!--  <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_user"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/circle_shadow"
+            android:src="@drawable/login" />-->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_ll"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:alpha="1"
+            android:paddingVertical="20dp"
+            android:elevation="30dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/gray_divider"
+                android:layout_marginHorizontal="@dimen/dimen_horizontal_margin"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:id="@+id/ll_email"
+                    android:layout_width="match_parent"
+                    android:background="@color/gray_divider"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/ed_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:hint="@string/hint_email"
+                        android:layout_marginHorizontal="10dp"
+                        android:inputType="textEmailAddress"
+                        android:textDirection="locale"
+                        android:textAlignment="viewStart"
+                        android:fontFamily="@font/arbfonts_urw_din_arabic"
+                        android:background="@color/gray_divider"
+                        android:textColor="@color/orange"
+                        android:textColorHint="@color/gray"
+                        android:textSize="13sp" />
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/ll_email"
+                    android:background="@color/gray_divider"
+                    android:layout_height="0.5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/gray_divider"
+                android:layout_marginHorizontal="@dimen/dimen_horizontal_margin"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:id="@+id/ll_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                  <EditText
+                            android:id="@+id/ed_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="46dp"
+                            android:hint="@string/hint_password"
+                            android:layout_marginHorizontal="10dp"
+                            android:inputType="textPassword"
+
+                            android:textDirection="locale"
+                            android:textAlignment="viewStart"
+                            android:fontFamily="@font/arbfonts_urw_din_arabic"
+                            android:background="@color/gray_divider"
+                            android:textColor="@color/orange"
+                            android:textColorHint="@color/gray"
+                            android:textSize="13sp" />
+
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/ll_password"
+                    android:background="@color/gray_divider"
+                    android:layout_height="0.5dp"/>
+
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/login_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@android:color/white"
+                android:layout_marginHorizontal="20dp"
+                android:onClick="login_user"
+                android:background="@drawable/button_border_enabled"
+                android:text="@string/text_login" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewLinkRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:onClick="goToRegister"
+                android:text="@string/text_not_member"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,397 @@
+<resources>
+    <string name="app_name" translatable="false">Lebsetna</string>
+    <string name="click" translatable="false">registration activity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string-array name="country">
+        <item>Tunis</item>
+        <item>Sfax</item>
+        <item>Sousse</item>
+        <item>Kairouan</item>
+        <item>Bizerte</item>
+        <item>Gabès</item>
+        <item>La Soukra</item>
+        <item>Ariana</item>
+        <item>Sidi Hassine</item>
+        <item>El Mourouj</item>
+        <item>Gafsa</item>
+        <item>Raoued</item>
+        <item>Monastir</item>
+        <item>La Marsa</item>
+        <item>Mnihla</item>
+        <item>Ben Arous</item>
+        <item>Ettadhamen</item>
+        <item>Kasserine</item>
+        <item>Douar Hicher</item>
+        <item>Ben Gardane</item>
+        <item>Djerba - Houmt Souk</item>
+        <item>Le Kram</item>
+        <item>Hammamet</item>
+        <item>Zarzis</item>
+        <item>Le Bardo</item>
+        <item>Médenine</item>
+        <item>Nabeul</item>
+        <item>Tataouine</item>
+        <item>Mohamedia</item>
+        <item>Djerba - Midoun</item>
+        <item>Béja</item>
+        <item>Msaken</item>
+        <item>Radès</item>
+        <item>Oued Ellil</item>
+        <item>Moknine</item>
+        <item>Le Kef</item>
+        <item>Menzel Bourguiba</item>
+        <item>Kalâa Kebira</item>
+        <item>Sakiet Ezzit</item>
+        <item>Mahdia</item>
+        <item>Jemmal</item>
+        <item>Ksar Hellal</item>
+        <item>Sidi Bouzid</item>
+        <item>Kélibia</item>
+        <item>Fouchana</item>
+        <item>Sakiet Eddaïer</item>
+        <item>La Goulette</item>
+        <item>Jendouba</item>
+        <item>El Aïn</item>
+        <item>Hammam Sousse</item>
+        <item>Hammam Lif</item>
+        <item>Dar Chaâbane</item>
+        <item>El Hamma</item>
+        <item>Gremda</item>
+        <item>Ennour</item>
+        <item>Bou Mhel el-Bassatine</item>
+        <item>Menzel Temime</item>
+        <item>Korba</item>
+        <item>Métlaoui</item>
+        <item>Soliman</item>
+        <item>Téboulba</item>
+        <item>tozeur</item>
+        <item>Ezzahra</item>
+        <item>Ouabed Khazanet</item>
+        <item>Kalâa Seghira</item>
+        <item>Mateur</item>
+        <item>El Ksar</item>
+        <item>Thyna</item>
+        <item>La Manouba</item>
+        <item>Hammam Chott</item>
+        <item>Sisseb-Driaat</item>
+        <item>Siliana</item>
+        <item>El Amra</item>
+        <item>Balta-Bou Aouane</item>
+        <item>Douz</item>
+        <item>Zarzis Nord</item>
+        <item>Mornag</item>
+        <item>Fériana</item>
+        <item>Joumine</item>
+        <item>Ksour Essef</item>
+        <item>Djedeida</item>
+        <item>Ras Jebel</item>
+        <item>Naassen</item>
+        <item>Ghannouch</item>
+        <item>Tebourba</item>
+        <item>Akouda</item>
+        <item>Ghezala</item>
+        <item>Mégrine</item>
+        <item>Den Den</item>
+        <item>Chihia</item>
+        <item>Redeyef</item>
+        <item>Sbeïtla</item>
+        <item>Grombalia</item>
+        <item>Djerba - Ajim</item>
+        <item>Raqqada</item>
+        <item>Chrayaa-Machrek Chams</item>
+        <item>El Fahs</item>
+        <item>Fondouk Jedid-Seltene</item>
+        <item>Essaïda</item>
+        <item>Ouled Chamekh</item>
+        <item>Menzel Jemil</item>
+        <item>Chebba</item>
+        <item>Faiedh Bennour</item>
+        <item>Takelsa</item>
+        <item>Ouchtata-Jmila</item>
+        <item>Ezzouhour</item>
+        <item>Ouerdanine</item>
+        <item>Teboulbou</item>
+        <item>Souk Jedid</item>
+        <item>Nefta</item>
+        <item>Medjez el-Bab</item>
+        <item>Bou Salem</item>
+        <item>Béni Khiar</item>
+        <item>Moularès</item>
+        <item>El Jem</item>
+        <item>Tinja</item>
+        <item>Sidi Zid-Awled Moulahem</item>
+        <item>Nadhour-Sidi Ali Ben Abed</item>
+        <item>Zaghouan</item>
+        <item>Zaouiet Sousse</item>
+        <item>Kébili</item>
+        <item>Utique</item>
+        <item>Mornaguia</item>
+        <item>Tabarka</item>
+        <item>Ghardimaou</item>
+        <item>Hadjeb</item>
+        <item>Lessouda</item>
+        <item>Hassi El Ferid</item>
+        <item>Habib Thameur Bouatouch</item>
+        <item>El Ayoun</item>
+        <item>Menzel Abderrahmane</item>
+        <item>Sahline Moôtmar</item>
+        <item>Grimet-Hicher</item>
+        <item>Hazeg Ellouza</item>
+        <item>Souk Lahad</item>
+        <item>Menzel Bouzelfa</item>
+        <item>El Hachachna</item>
+        <item>El Alia</item>
+        <item>Thala</item>
+        <item>Kalâat el-Andalous</item>
+        <item>Bekalta</item>
+        <item>Aachech-Aouadna-Boujarbou-Majel Draj</item>
+        <item>Tajerouine</item>
+        <item>Ezzouhour</item>
+        <item>Carthage</item>
+        <item>Ennasr</item>
+        <item>Zéramdine</item>
+        <item>Jouaouda</item>
+        <item>Tlelsa</item>
+        <item>Bembla-Mnara</item>
+        <item>Mahrès</item>
+        <item>Baten Ghzal</item>
+        <item>Kerkennah</item>
+        <item>Béni Khalled</item>
+        <item>Faouar</item>
+        <item>Tazougrane-Boukrim-Zaouiet El Mgaies</item>
+        <item>Zannouch</item>
+        <item>Abida</item>
+        <item>Aïn Sobh-Nadhour</item>
+        <item>Rakhmat</item>
+        <item>Chenini Nahal</item>
+        <item>Smâr</item>
+        <item>Belkhir</item>
+        <item>Meknassy</item>
+        <item>Bouzguem</item>
+        <item>Sidi Morched</item>
+        <item>Sidi Jedidi</item>
+        <item>Bennane-Bodheur</item>
+        <item>El Guettar</item>
+        <item>Hkaima</item>
+        <item>El Bassatine</item>
+        <item>Makthar</item>
+        <item>Kalaa-Maaden-Farksan</item>
+        <item>Aïn Khmaissia</item>
+        <item>Testour</item>
+        <item>Kettana</item>
+        <item>Bou Arada</item>
+        <item>Ksibet el-Médiouni</item>
+        <item>Souk Sebt</item>
+        <item>Dahmani</item>
+        <item>Sayada</item>
+        <item>Aïn El Beïdha</item>
+        <item>Menzel Hayet</item>
+        <item>Messaadine</item>
+        <item>Khmouda</item>
+        <item>Zaafrana-Dir Kef</item>
+        <item>Mdhilla</item>
+        <item>Saouaf</item>
+        <item>Chrifet-Boucharray</item>
+        <item>Bouchemma</item>
+        <item>Khmairia</item>
+        <item>Le Sers</item>
+        <item>Zelba</item>
+        <item>El Amaiem</item>
+        <item>Bou Argoub</item>
+        <item>Skhira</item>
+        <item>Téboursouk</item>
+        <item>Zriba</item>
+        <item>Bechli-Blidet-Jerssin</item>
+        <item>Menzel Ennour</item>
+        <item>Mareth</item>
+        <item>Ksibet Thrayet</item>
+        <item>Agareb</item>
+        <item>Chaouachi</item>
+        <item>Regueb</item>
+        <item>Sidi Thabet</item>
+        <item>Khniss</item>
+        <item>Thibar</item>
+        <item>Enfida</item>
+        <item>Lela</item>
+        <item>Rejiche</item>
+        <item>Métouia</item>
+        <item>Hajeb El Ayoun</item>
+        <item>Chraitia-Ksour</item>
+        <item>Gaâfour</item>
+        <item>Sidi Bou Ali</item>
+        <item>Dkhilet Toujane</item>
+        <item>Menzel El Habib</item>
+        <item>Sidi Aïch</item>
+        <item>Sidi Ismaïl</item>
+        <item>Oudhref</item>
+        <item>Bouficha</item>
+        <item>Metline</item>
+        <item>Raf Raf</item>
+        <item>Jérissa</item>
+        <item>Aïn Draham</item>
+        <item>Mansoura</item>
+        <item>Ghomrassen</item>
+        <item>Sened</item>
+        <item>El Haouaria</item>
+        <item>Tazarka</item>
+        <item>Sidi Ali Ben Aoun</item>
+        <item>Jhina</item>
+        <item>Hammam Ghezèze</item>
+        <item>Oueslatia</item>
+        <item>Bechri-Fatnassa</item>
+        <item>Beni Hassen</item>
+        <item>Khalidia</item>
+        <item>Menzel Kamel</item>
+        <item>Haffouz</item>
+        <item>Sidi Ameur-Mesjed-Aïssa</item>
+        <item>Rahal</item>
+        <item>Bir Mcherga</item>
+        <item>Bohra</item>
+        <item>Kalaat Senan</item>
+        <item>Amiret Hajjaj</item>
+        <item>El Maâmoura</item>
+        <item>Sbikha</item>
+        <item>Bir Lahmar</item>
+        <item>El Golâa</item>
+        <item>Degache</item>
+        <item>Zaouiet Djedidi</item>
+        <item>El Krib</item>
+        <item>Bou Hajla</item>
+        <item>El Maâgoula</item>
+        <item>Foussana</item>
+        <item>Hbabsa</item>
+        <item>El Hencha</item>
+        <item>Nadhour</item>
+        <item>Tataouine Sud</item>
+        <item>Nouvelle Matmata</item>
+        <item>Sidi Alouane</item>
+        <item>Kerker</item>
+        <item>Hergla</item>
+        <item>El Bradâa</item>
+        <item>Mezzouna</item>
+        <item>Slouguia</item>
+        <item>Nefza</item>
+        <item>Chott Meriem</item>
+        <item>Touza</item>
+        <item>Jemna</item>
+        <item>Jebiniana</item>
+        <item>Menzel Bouzaiane</item>
+        <item>Somâa</item>
+        <item>Thélepte</item>
+        <item>Zaouiet Kontoch</item>
+        <item>Boughrara</item>
+        <item>Melloulèche</item>
+        <item>Borj El Amri</item>
+        <item>Sbiba</item>
+        <item>Bir El Hafey</item>
+        <item>Majel Bel Abbès</item>
+        <item>El Batan</item>
+        <item>El Hamma du Jérid</item>
+        <item>Sakiet Sidi Youssef</item>
+        <item>Remada</item>
+        <item>Amiret Touazra</item>
+        <item>Bouhjar</item>
+        <item>Sidi Bou Saïd</item>
+        <item>El Ksour</item>
+        <item>Jilma</item>
+        <item>Lamta</item>
+        <item>Chorbane</item>
+        <item>Sejnane</item>
+        <item>Zarat</item>
+        <item>El Marja</item>
+        <item>Essouassi</item>
+        <item>Ghar El Melh</item>
+        <item>Djebel Oust</item>
+        <item>Amiret El Fhoul</item>
+        <item>Menzel Horr</item>
+        <item>Amdoun</item>
+        <item>Aousja</item>
+        <item>El Ghnada</item>
+        <item>Azmour</item>
+        <item>Nasrallah</item>
+        <item>Bargou</item>
+        <item>Bir Ali Ben Khalifa</item>
+        <item>El Masdour-Menzel Harb</item>
+        <item>Hazoua</item>
+        <item>Rouhia</item>
+        <item>Dar Allouch</item>
+        <item>Sidi Bennour</item>
+        <item>Cherahil</item>
+        <item>Jedelienne</item>
+        <item>Bou Merdes</item>
+        <item>Dehiba</item>
+        <item>Rjim Maatoug</item>
+        <item>El Mida</item>
+        <item>Goubellat</item>
+        <item>Sidi Boubaker</item>
+        <item>Menzel Mehiri</item>
+        <item>Fernana</item>
+        <item>Kondar</item>
+        <item>Menzel Fersi</item>
+        <item>Korbous</item>
+        <item>Haïdra</item>
+        <item>Cebbala Ouled Asker</item>
+        <item>Nebeur</item>
+        <item>El kAlâa</item>
+        <item>Sidi Bou Rouis</item>
+        <item>Graïba</item>
+        <item>Hebira</item>
+        <item>Sidi Makhlouf</item>
+        <item>Beni Khedache</item>
+        <item>Chebika</item>
+        <item>El Aroussa</item>
+        <item>Sidi El Hani</item>
+        <item>Kesra</item>
+        <item>Kalâat Khasba</item>
+        <item>Ouled Haffouz</item>
+        <item>Oued Meliz</item>
+        <item>Tamerza</item>
+        <item>Menzel Chaker</item>
+        <item>Touiref</item>
+        <item>Matmata</item>
+        <item>Menzel Salem</item>
+        <item>Aïn Djeloula</item>
+        <item>Echrarda</item>
+        <item>Beni MTir</item>
+
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="rechercher">Rechercher</string>
+
+    <string name="text_accounts">All Accounts</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="text_login">Login</string>
+    <string name="text_register">Register</string>
+    <string name="error_message_name">Enter Full Name</string>
+    <string name="error_message_email">Enter Valid Email</string>
+    <string name="error_message_age">Enter Age</string>
+    <string name="error_message_password">Enter Password</string>
+    <string name="success_message">Registration Successful</string>
+    <string name="text_not_member">No account yet?
+        <b>Create one</b>
+    </string>
+    <string name="text_already_member">Already a member? Login</string>
+    <string name="error_email_exists">Email Already Exists</string>
+    <string name="error_password_match">Password Does Not Matches</string>
+    <string name="error_valid_email_password">Wrong Email or Password</string>
+    <string name="action_settings">Settings</string>
+    <string name="text_hello">Hello,</string>
+    <string name="text_title">Android Tutorials Hub</string>
+    <string name="title_activity_registration">RegistrationActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="emptyField">This field must be not empty</string>
+    <string name="invalidPassword">Invalid password you must add min 6 characters</string>
+    <string name="invalidEmail">Invalid Email</string>
+    <string name="login">Login</string>
+    <string name="to_do">to do</string>
+    <string name="title_activity_add_post">Add_post</string>
+    <string name="title_activity_adding_post">adding_post</string>
+</resources>

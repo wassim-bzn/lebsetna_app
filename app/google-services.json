@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "724946166505",
+    "project_id": "lebsetna-262d4",
+    "storage_bucket": "lebsetna-262d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724946166505:android:9b51bbf500698611ee8678",
+        "android_client_info": {
+          "package_name": "com.example.lebsetna"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "724946166505-dpdrd51q9mbovl2iaujdk3glvu7evk8n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL3Zz434ImVc6CrczllS27Nncdexy4ifY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "724946166505-dpdrd51q9mbovl2iaujdk3glvu7evk8n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

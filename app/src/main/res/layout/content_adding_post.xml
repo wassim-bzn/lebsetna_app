@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <ImageView
+                android:id="@+id/imported_image"
+                android:layout_width="match_parent"
+                android:layout_height="264dp"
+                android:layout_gravity="start" />
+
+        <ImageButton
+                android:id="@+id/import_image"
+                android:onClick="import_image"
+                android:layout_width="83dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@android:drawable/ic_menu_add" />
+
+        <TextView
+                android:text="Import Image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView5"
+                android:textAlignment="center" />
+
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editText_Nom"
+                android:hint="Nom" />
+
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editText_description"
+                android:hint="Description" />
+
+        <Button
+                android:text="Ajout habit"
+                android:layout_width="match_parent"
+                android:onClick="add_habit"
+                android:layout_height="wrap_content"
+                android:id="@+id/Add_habit" />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/result_upload" />
+
+        <Button
+                android:text="back to main menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="back_toMenu"
+                android:id="@+id/backToMenu" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
