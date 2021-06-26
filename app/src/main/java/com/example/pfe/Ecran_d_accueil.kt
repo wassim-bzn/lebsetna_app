@@ -47,10 +47,15 @@ class Ecran_d_accueil : AppCompatActivity() {
         imageButtonRefrech= findViewById(R.id.imageButtonRefrech)
         btn_ajout= findViewById(R.id.btn_ajout_post)
         btnmyPostsid= findViewById(R.id.btnmyPostsid)
+        /*recevoir de la variable email a partir de la page de login */
         var bundle: Bundle? = intent.extras
         if (bundle!!.getString("Useremail")!=null){
         Useremail = bundle!!.getString("Useremail").toString()
         }
+        /*dans le cas de login on ne passe pas les variables phone, role car on va le récuprer à partir de la base de donnée (myRefUser.addValueEventListener)
+        * mais si on va y aller à la page add poste qu'elle est une autre activity on va tout d'abord envoyer ces donner (phone , Role ..)
+        * et quand on va retourner à la cette page d'accueil voici le code pour les récupérer les donner (phone , Role ..)
+        * ainsi qu'il y a le controle (if) pour vérifier si les données viens de la page d'accueil ou bien de l'ajout d'un poste */
         userVille = bundle!!.getString("userVille").toString()
         if (bundle!!.getString("userPhone")!=null){
             userPhone = bundle!!.getString("userPhone").toString()
@@ -59,14 +64,24 @@ class Ecran_d_accueil : AppCompatActivity() {
         }
         firstLogin=1
         Toast.makeText(this@Ecran_d_accueil, Useremail, Toast.LENGTH_LONG).show()
+
+        /* myRefUser représente le clé "User" ( ou bien la table user** car dans la une base noSql comme FIREBASE on n'a pas la notion des tables plutôt des clés-Valeurs)  */
+        /* myRefHabit représente le clé "Habit" ( ou bien la table Habit** car dans la une base noSql comme FIREBASE on n'a pas la notion des tables plutôt des clés-Valeurs)  */
+
         val myRefHabit = database.getReference("habits")
         val myRefUser = database.getReference("Users")
         imageButtonRefrech.visibility = View.INVISIBLE;
-
+        /*récupération des données de User */
         myRefUser.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
+                /**
+                 * DataSnapshot = tout les données sous la table (User)
+                 * sous le boucle for il ya le champ snapshot
+                 * snapshot = chaque user un par un
+                 * snapshot.child = les donnée sous le champ snapshot (id,email,firstname ... )
+                 * get_value() = c'est une fonction prédéfinie pour récuperer ce donner
+                 * toString() = pour convertir ce donné pour string
+                 * */
                 val UserDatasnap = dataSnapshot.getValue()
                 for (snapshot in dataSnapshot.children) {
                     if (snapshot.child("email").getValue() == Useremail) {
@@ -112,6 +127,14 @@ class Ecran_d_accueil : AppCompatActivity() {
         }
         firstLogin=2
         myRefHabit.addValueEventListener(object : ValueEventListener {
+            /**
+             * DataSnapshot = tout les données sous la table (Habit)
+             * sous le boucle for il ya le champ snapshot
+             * snapshot = chaque Habit un par un
+             * snapshot.child = les donnée sous le champ snapshot (name,description,imageUrl ... )
+             * get_value() = c'est une fonction prédéfinie pour récuperer ce donnée
+             * toString() = pour convertir ce donné pour string
+             * */
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
@@ -123,11 +146,15 @@ class Ecran_d_accueil : AppCompatActivity() {
                     var ImageUrl = snapshot.child("imageUrl").getValue().toString()
                     var userId = snapshot.child("userId").getValue().toString()
                     var userPhone = snapshot.child("userPhone").getValue().toString()
+                    /**
+                     * on va créer une liste des habits pour qu'on puisse les afiicher dans la listview (page d'accueil)*/
                     list.add(Habit(Name, description, userId, ImageUrl, userPhone))
 
 
                 }
+
                 if (firstLogin==1 || overrided_Login_number=="True"){
+                    //post adapter= c'est une class pour afficher les données qu'on a récupérer
                     listView.adapter = PostsAdapter(this@Ecran_d_accueil, R.layout.post_item, list,userPhone,action)
                     imageButtonRefrech.visibility = View.INVISIBLE;
                     firstLogin=2

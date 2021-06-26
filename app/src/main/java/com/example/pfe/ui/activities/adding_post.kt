@@ -28,7 +28,7 @@ import java.util.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-
+/* c'est une classe pour ajouter un article (habit)*/
 class adding_post : AppCompatActivity() {
     lateinit var imageView: ImageView
     private val pickImage = 100

@@ -51,10 +51,11 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
             imageViewCategory.visibility = View.INVISIBLE;
             imageButtotrash.visibility=View.VISIBLE
         }
+        /**
+         * on va récupérer les données de user qui a ajouté un habit */
         myRefUser.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
+                //récupérer les données de user à partir de numero de tel
                 val UserDatasnap = dataSnapshot.child(habit.userPhone.toString())
                 UserData.id = UserDatasnap.child("id").getValue().toString()
                 UserData.email = UserDatasnap.child("email").getValue().toString()
