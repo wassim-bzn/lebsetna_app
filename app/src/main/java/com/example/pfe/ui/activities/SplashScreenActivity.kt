@@ -9,7 +9,6 @@ import com.example.pfe.common.Root.Companion.goToMainActivity
 
 class SplashScreenActivity : BaseActivity() {
     private val SPLASH_DISPLAY_LENGTH:Long = 1000
-    var tagSplash:String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         hideStatusBar()

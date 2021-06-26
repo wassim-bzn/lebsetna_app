@@ -19,19 +19,6 @@ import java.lang.reflect.Array
 
 class MainActivity : AppCompatActivity(),AdapterView.OnItemSelectedListener {
 
-    lateinit var spinner: Spinner
-    lateinit var list: Array
-    lateinit var linearLayoutManager: LinearLayoutManager
-    lateinit var recyclerView: RecyclerView
-    lateinit var btnLogin: Button
-    private lateinit var nestedScrollView: NestedScrollView
-    private val activity = this@MainActivity
-    private lateinit var textInputLayoutEmail: TextInputLayout
-    private lateinit var textInputLayoutPassword: TextInputLayout
-
-    private lateinit var textInputEditTextEmail: TextInputEditText
-    private lateinit var textInputEditTextPassword: TextInputEditText
-
     private lateinit var appCompatButtonLogin: AppCompatButton
 
 
@@ -55,33 +42,6 @@ class MainActivity : AppCompatActivity(),AdapterView.OnItemSelectedListener {
                 this.startActivity(intentRegister)
             }
         }
-
-
-        fun emptyInputEditText() {
-            TODO("Not yet implemented")
-        }
-
-        /**
-         * This method is to initialize objects to be used
-         */
-
-
-        /*  recyclerView = findViewById(R1.id.RecyclerView_Acc)
-
-
-        linearLayoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager=linearLayoutManager
-        spinner=findViewById(R1.id.spinner)
-        val adapter =ArrayAdapter.createFromResource(
-            this,
-            list.R1.country, android.R.layout.simple_spinner_item
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter=adapter
-        spinner.onItemSelectedListener=this
-        setupHyperlink()
-    }*/
-
 
     }
 

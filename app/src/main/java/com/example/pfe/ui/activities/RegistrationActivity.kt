@@ -1,6 +1,5 @@
 package com.example.pfe.ui.activities
 
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -17,13 +16,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
 
 
 class RegistrationActivity() : AppCompatActivity() {
-    private lateinit var inputValidation: InputControl
     private lateinit var btn_Inscription: AppCompatButton
     private lateinit var edt_name:EditText
     private lateinit var edt_prenom:EditText

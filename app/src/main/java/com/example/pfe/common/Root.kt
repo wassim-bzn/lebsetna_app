@@ -17,11 +17,7 @@ class Root{
              activity.startActivity(intent)
              activity.finishAffinity()
         }
-        fun goToSplashScreen(activity: Activity) {
-            val intent = Intent(activity, SplashScreenActivity::class.java)
-            activity.startActivity(intent)
-            activity.finishAffinity()
-        }
+
         fun goToLoginActivity(activity: Activity, tag: String) {
             val intent = Intent(activity, LoginActivity::class.java)
             intent.putExtra("tag", tag)
