@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import com.example.pfe.BaseActivity
-import com.example.pfe.DatabaseHelper
 import com.example.pfe.Ecran_d_accueil
 import com.example.pfe.R
 import com.example.pfe.common.InputControl

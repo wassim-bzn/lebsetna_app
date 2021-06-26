@@ -29,7 +29,7 @@ class PreferenceHelper {
             app_preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
             return app_preferences!!.getBoolean(IsLogIn,false)
         }
-     fun saveUser(context: Context,user: UserModel?) {
+        fun saveUser(context: Context,user: UserModel?) {
             app_preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
             val prefsEditor: SharedPreferences.Editor = app_preferences!!.edit()
             var gson = Gson()
@@ -40,17 +40,17 @@ class PreferenceHelper {
 
         }
         fun getUser(context: Context): UserModel? {
-            var user:UserModel?=null
-            app_preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-            val json: String = app_preferences!!.getString(USER, "")!!
-            val gson = Gson()
-            user = gson.fromJson(json, UserModel::class.java)
-            if(user!=null){
-                return user
-            }
-            else{
-                return null
-            }
+                var user:UserModel?=null
+        app_preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val json: String = app_preferences!!.getString(USER, "")!!
+                val gson = Gson()
+        user = gson.fromJson(json, UserModel::class.java)
+        if(user!=null){
+            return user
+        }
+        else{
+            return null
+        }
         }
 
 
@@ -61,23 +61,23 @@ class PreferenceHelper {
             editor.apply()
         }
         fun getStringFromSharedPreferences(KEY_NAME: String,context: Context):String?{
-            app_preferences = context.getSharedPreferences(
-                PREF_NAME,
-                Context.MODE_PRIVATE
-            )
-            return app_preferences!!.getString(KEY_NAME, "")!!
+                app_preferences = context.getSharedPreferences(
+                        PREF_NAME,
+                        Context.MODE_PRIVATE
+                )
+        return app_preferences!!.getString(KEY_NAME, "")!!
         }
         fun getIntFromSharedPreferences(KEY_NAME: String,context: Context):Int{
             app_preferences = context.getSharedPreferences(
-                PREF_NAME,
-                Context.MODE_PRIVATE
+                    PREF_NAME,
+                    Context.MODE_PRIVATE
             )
             return app_preferences!!.getInt(KEY_NAME, 0)!!
         }
         fun saveToSharedPreferences(KEY_NAME: String, value: Any,context: Context){
             app_preferences = context.getSharedPreferences(
-                PREF_NAME,
-                Context.MODE_PRIVATE
+                    PREF_NAME,
+                    Context.MODE_PRIVATE
             )
             val editor: SharedPreferences.Editor = app_preferences!!.edit()
             if (value is Int){

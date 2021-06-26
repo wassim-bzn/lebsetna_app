@@ -20,13 +20,13 @@ import java.util.*
 
 open class BaseActivity : AppCompatActivity(),Serializable {
     companion object {
-         var dLocale: Locale? = null
+        var dLocale: Locale? = null
         var isConnected: Boolean = true
         var activity:Activity?=null
         var isAppRunning = false
     }
     var TAG = this.javaClass.simpleName
-     var oldLocale: Locale? = null
+    var oldLocale: Locale? = null
     init {
         updateConfig(this)
         isAppRunning=true

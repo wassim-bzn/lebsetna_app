@@ -115,10 +115,7 @@ class adding_post : AppCompatActivity() {
 
             Toast.makeText(this,"Failed To save Habit! ",Toast.LENGTH_SHORT).show()
         }
-
         upload_image(userId)
-
-
 
     }
     fun upload_image(uuid:String){
@@ -131,8 +128,6 @@ class adding_post : AppCompatActivity() {
 
             .addOnSuccessListener {
                 taskSnapshot: UploadTask.TaskSnapshot? -> var url = taskSnapshot!!.uploadSessionUri
-            val dwnTxt:TextView = findViewById<View>(R.id.result_upload) as TextView
-            //dwnTxt.text = url.toString()
             pd.dismiss()
             Toast.makeText(this, "Successfully Uploaded :)", Toast.LENGTH_LONG).show()
             Snackbar.make(findViewById(R.id.result_upload),"Image Uploaded",Snackbar.LENGTH_SHORT).show()

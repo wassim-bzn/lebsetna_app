@@ -1,12 +1,10 @@
 package com.example.pfe
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.View
-import android.view.View.INVISIBLE
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pfe.adapter.PostsAdapter
@@ -30,11 +28,7 @@ class Ecran_d_accueil : AppCompatActivity() {
     lateinit var btnmyPostsid: ImageButton
     var database = FirebaseDatabase.getInstance()
     var TAG: String = "gettingDataFromDb"
-// ...
-
     var UserData = UserModel("", "", "", "", "", "", "")
-    var habit = Habit("", "", "", "", "")
-    var favoutits = Favourits( "", "")
     var list = mutableListOf<Habit>()
     var list_myPosts = mutableListOf<Habit>()
     var list_myPosts_favourits = mutableListOf<Habit>()
@@ -74,7 +68,6 @@ class Ecran_d_accueil : AppCompatActivity() {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 val UserDatasnap = dataSnapshot.getValue()
-                //UserData=(UserDatasnap["id"],UserDatasnap["email"],UserDatasnap["firstName"],UserDatasnap["lastName"],UserDatasnap["phone"],UserDatasnap["ville"],UserDatasnap["role"])
                 for (snapshot in dataSnapshot.children) {
                     if (snapshot.child("email").getValue() == Useremail) {
                         UserData.id = snapshot.child("id").getValue().toString()
@@ -124,7 +117,6 @@ class Ecran_d_accueil : AppCompatActivity() {
                 // whenever data at this location is updated.
                 list = mutableListOf<Habit>()
                 val UserDatasnap = dataSnapshot.getValue()
-                //UserData=(UserDatasnap["id"],UserDatasnap["email"],UserDatasnap["firstName"],UserDatasnap["lastName"],UserDatasnap["phone"],UserDatasnap["ville"],UserDatasnap["role"])
                 for (snapshot in dataSnapshot.children) {
                     var Name = snapshot.child("name").getValue().toString()
                     var description = snapshot.child("description").getValue().toString()
@@ -167,7 +159,6 @@ class Ecran_d_accueil : AppCompatActivity() {
                 // whenever data at this location is updated.
                 list_myPosts_favourits = mutableListOf<Habit>()
                 val UserDatasnap = dataSnapshot.getValue()
-                //UserData=(UserDatasnap["id"],UserDatasnap["email"],UserDatasnap["firstName"],UserDatasnap["lastName"],UserDatasnap["phone"],UserDatasnap["ville"],UserDatasnap["role"])
                 for (snapshot in dataSnapshot.children) {
                     if (snapshot.child("userPhone").getValue() == userPhone) {
                         var habitId = snapshot.child("habitId").getValue().toString()
