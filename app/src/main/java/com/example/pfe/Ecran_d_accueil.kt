@@ -188,14 +188,7 @@ class Ecran_d_accueil : AppCompatActivity() {
 
     }
 
-    fun logout_user(view: View) {
-        Firebase.auth.signOut()
-        Root.goToLoginActivity(this@Ecran_d_accueil, "signout")
-    }
-    fun refrechData(view: View) {
-        listView.adapter = PostsAdapter(this@Ecran_d_accueil, R.layout.post_item, list,userPhone,action)
-        imageButtonRefrech.visibility = View.INVISIBLE;
-    }
+
 
     fun btn_ajout_function(view: View) {
         val myToast = Toast.makeText(applicationContext, "btn is clicked", Toast.LENGTH_SHORT)
@@ -238,4 +231,15 @@ class Ecran_d_accueil : AppCompatActivity() {
 
         imageButtonRefrech.visibility = View.INVISIBLE;
     }
+    fun refrechData(view: View) {
+        listView.adapter = PostsAdapter(this@Ecran_d_accueil, R.layout.post_item, list,userPhone,action)
+        imageButtonRefrech.visibility = View.INVISIBLE;
+    }
+    fun logout_user(view: View) {
+        /*fonction de firebqse pour la déconnection */
+        Firebase.auth.signOut()
+        /*retourner à la page de login*/
+        Root.goToLoginActivity(this@Ecran_d_accueil, "signout")
+    }
+
 }
