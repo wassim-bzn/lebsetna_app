@@ -32,6 +32,7 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
         val view:View=layoutInflater.inflate(resource,null)
         val imageView:ImageView=view.findViewById(R.id.post_img)
         val titreTextView: TextView =view.findViewById(R.id.post_title)
+        val post_description: TextView =view.findViewById(R.id.post_description)
         val adresseTextView:TextView=view.findViewById(R.id.post_address)
         val nomTextView:TextView=view.findViewById(R.id.post_nom)
         val favoris_textview:TextView=view.findViewById(R.id.favoris_textview)
@@ -80,7 +81,8 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
                         .into(imageView)
 
                 }
-                titreTextView.text=habit.description
+                titreTextView.text=habit.Name
+                post_description.text=habit.description
                 adresseTextView.text=UserData.ville
                 nomTextView.text=UserData.firstName
                 prenomTextView.text=UserData.lastName
