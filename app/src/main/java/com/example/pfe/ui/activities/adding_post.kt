@@ -53,6 +53,7 @@ class adding_post : AppCompatActivity() {
         USER_ROLE= bundle!!.getString("userRole")
 
     }
+    /*fonction pour importer l'image de l'habit de user gallery =*/
     fun import_image(view: View?) {
 
         val myToast = Toast.makeText(applicationContext,"import_image clicked", Toast.LENGTH_SHORT)
@@ -63,7 +64,7 @@ class adding_post : AppCompatActivity() {
 
 
     }
-
+    /*fonction listener pour metter l'image importé dans l'image view =*/
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == pickImage) {
@@ -72,7 +73,7 @@ class adding_post : AppCompatActivity() {
         }
     }
 
-
+    /*fonction pour revenir à la liste d'accueil =*/
     fun back_toMenu(view: View?) {
 
         val intent = Intent(this, Ecran_d_accueil::class.java)
@@ -82,7 +83,8 @@ class adding_post : AppCompatActivity() {
         intent.putExtra("userRole", USER_ROLE)
         startActivity(intent)
     }
-
+    /**
+     * fonction pour ajouter un habit à la base de donnée*/
     fun add_habit(view: View?) {
         val myToast = Toast.makeText(applicationContext, "add_habit clicked", Toast.LENGTH_SHORT)
         myToast.setGravity(Gravity.LEFT, 200, 200)
@@ -94,17 +96,24 @@ class adding_post : AppCompatActivity() {
         var editText_description = findViewById(R.id.editText_description) as EditText
         var name = editText_Nom.text.toString()
         var description = editText_description.text.toString()
+        /* prendre de date et temps exact avec les seconde */
         val current = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LocalDateTime.now()
         } else {
             TODO("VERSION.SDK_INT < O")
         }
+        /* convertir le date pour une chaine qui fait une concatination pour les chiffres de date
+        * pour justement l'utiliser en tant que iD pour un post (habit)
+        */
         val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS")
         val formatted = current.format(formatter)
-
+        /** le date year month day hour minut second c'est un id incrimenter par défaut  */
         var userId=formatted
-
+        /*créer une nouvelle iunstence d'un habit avec les donner de user qui a importé (érit)*/
         val Habit = Habit(name,description,userId,"images/" + userId,userPhone)
+        /**
+         * myRef.child(userId).setValue(Habit).addOnSuccessListene
+         * c'est la fonction listener qui ajoute les données dans la base de données real time*/
         myRef.child(userId).setValue(Habit).addOnSuccessListener {
             editText_Nom.text.clear()
             editText_description.text.clear()
@@ -115,29 +124,41 @@ class adding_post : AppCompatActivity() {
 
             Toast.makeText(this,"Failed To save Habit! ",Toast.LENGTH_SHORT).show()
         }
+        /* c'est la fonction  qui ajoute l'Image dans la base de données des images de firebase Cloud storqge */
         upload_image(userId)
 
     }
+    /* c'est la fonction  qui ajoute l'Image dans la base de données des images de firebase Cloud storqge */
     fun upload_image(uuid:String){
+        /*progress dialog pour afficher le pourcentage de l'upload de l'image*/
         val pd = ProgressDialog(this)
         pd.setTitle("Uploading Image..")
         pd.show()
-
+        /*
+        *Instentation de la class StorageReference de Firebase pour les appels du service Cloud Storage de Firebase
+        * le uuid de l'image il va etre le meme que le l'ID d'un habit pour justement faire le relation entre eu*/
         val habitImagesRef: StorageReference = storageRef.child("images/" + uuid)
         habitImagesRef.putFile(imageUri!!)
-
+            /* c'est la fonction listener qui ajoute l'Image dans la base de données des images de firebase Cloud storqge */
             .addOnSuccessListener {
+                /* s'il n'y a pas un problème lors de l'upload */
+
                 taskSnapshot: UploadTask.TaskSnapshot? -> var url = taskSnapshot!!.uploadSessionUri
+                /*pd.dismiss() : stop le ProgressDialog lorsque l'upload est fini*/
             pd.dismiss()
-            Toast.makeText(this, "Successfully Uploaded :)", Toast.LENGTH_LONG).show()
+                /*affichage d'un  Tost et un snackbar pour informer que l'upload à été fait correctement */
+
+                Toast.makeText(this, "Successfully Uploaded :)", Toast.LENGTH_LONG).show()
             Snackbar.make(findViewById(R.id.result_upload),"Image Uploaded",Snackbar.LENGTH_SHORT).show()
         }
             .addOnFailureListener{
+                /* s'il y a un problème lors de l'upload*/
                 val myToast = Toast.makeText(applicationContext, "Fail to Upload! ", Toast.LENGTH_SHORT)
                 myToast.show()
                 pd.dismiss()
             }
             .addOnProgressListener {
+                /*calcul de pourcentage des bits de l'image uploadé pour bien affiché la résultat correct dans le progress bar */
                 taskSnapshot: UploadTask.TaskSnapshot?-> var snap = taskSnapshot!!
                 val progressPercent: Double = 100.0 * snap.getBytesTransferred() / snap.getTotalByteCount()
                 pd.setMessage("progress : "+ progressPercent.toInt() + "%")
