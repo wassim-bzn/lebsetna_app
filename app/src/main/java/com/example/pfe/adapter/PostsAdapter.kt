@@ -96,11 +96,9 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
 
         myRefFavorits.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
                 list_myPosts_favourits = mutableListOf<Favourits>()
                 val UserDatasnap = dataSnapshot.getValue()
-                //UserData=(UserDatasnap["id"],UserDatasnap["email"],UserDatasnap["firstName"],UserDatasnap["lastName"],UserDatasnap["phone"],UserDatasnap["ville"],UserDatasnap["role"])
+                //UserData=UserData(UserDatasnap["id"],UserDatasnap["email"],UserDatasnap["firstName"],UserDatasnap["lastName"],UserDatasnap["phone"],UserDatasnap["ville"],UserDatasnap["role"])
                 for (snapshot in dataSnapshot.children) {
                   var habitIdfav = snapshot.child("habitId").getValue().toString()
                   var userPhonefav = snapshot.child("userPhone").getValue().toString()

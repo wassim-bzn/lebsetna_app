@@ -55,7 +55,14 @@ class Ecran_d_accueil : AppCompatActivity() {
         /*dans le cas de login on ne passe pas les variables phone, role car on va le récuprer à partir de la base de donnée (myRefUser.addValueEventListener)
         * mais si on va y aller à la page add poste qu'elle est une autre activity on va tout d'abord envoyer ces donner (phone , Role ..)
         * et quand on va retourner à la cette page d'accueil voici le code pour les récupérer les donner (phone , Role ..)
-        * ainsi qu'il y a le controle (if) pour vérifier si les données viens de la page d'accueil ou bien de l'ajout d'un poste */
+        * ainsi qu'il y a le controle (if) pour vérifier si les données viens de la page d'accueil ou bien de l'ajout d'un poste
+        *
+        * firstlogin =1 cet a dire si je suis connecté pour la 1ere fois a la page d'accueil: donc je vais faire un appel à la base de donnée pour importer tous les données
+        * firstlogin =2 j'ai déja les donnée mais s'il ya un nouvelle post(habit) qui a été ajouté,supprimé par un autre user par example on va pas faire un refrech automatiaue on va afficher un boutton de refrech pour nous dire qu'il ya un noueau changement dans la liste
+        * firstlogin =3 si le user est dans une autre activité d'ajout d'un habit; list favourits , list my posts; par example et ilya un changement l'application va just nous dire qu'il ya un changement sans affichage du boutton refrech car on est pas à la page d'accueil
+        * overrided_Login_number=True c'est une cas lorsque le user se connecte pour la 1ere fois et il va sur une autre page d'ajout habit par example le listener il va détecter qu'on est dans firstlogin=2 ou bien firstlogin=3 donc dans ce cas il va pas afficher les données de nouveau
+        * donc overrided_Login_number =True nous informe qu'il faux faire un import ded données de nouveaux lorsqu'on est pas dans firstlogin=1 (on n'est pas connecté pour la 1ere fois)
+        *  */
         userVille = bundle!!.getString("userVille").toString()
         if (bundle!!.getString("userPhone")!=null){
             userPhone = bundle!!.getString("userPhone").toString()
@@ -152,9 +159,12 @@ class Ecran_d_accueil : AppCompatActivity() {
 
 
                 }
-
+            /** firstlogin =1 cet a dire si je suis connecté pour la 1ere fois a la page d'accueil: donc je vais faire un appel à la base de donnée pour importer tous les données
+             * firstlogin =2 j'ai déja les donnée mais s'il ya un nouvelle post(habit) qui a été ajouté,supprimé par un autre user par example on va pas faire un refrech automatiaue on va afficher un boutton de refrech pour nous dire qu'il ya un noueau changement dans la liste
+             * firstlogin =3 si le user est dans une autre activité d'ajout d'un habit par example et ilya un changement l'application va just nous dire qu'il ya un changement sans affichage du boutton refrech car on est pas à la page d'accueil
+            */
                 if (firstLogin==1 || overrided_Login_number=="True"){
-                    //post adapter= c'est une class pour afficher les données qu'on a récupérer
+                    //post adapter= c'est une class pour afficher les données qu'on a récupérer de la base
                     listView.adapter = PostsAdapter(this@Ecran_d_accueil, R.layout.post_item, list,userPhone,action)
                     imageButtonRefrech.visibility = View.INVISIBLE;
                     firstLogin=2
@@ -172,18 +182,24 @@ class Ecran_d_accueil : AppCompatActivity() {
             }
 //
             override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
+                // erreur lors de récupération des données
                 Log.w(TAG, "Failed to read habit Data.", error.toException())
             }
         })
 
-
+        /*instentiation de la base Favourits*/
         val myRefFavorits = database.getReference("Favourits")
-
+        /**
+         * DataSnapshot = tout les données sous la table (Favourits)
+         * sous le boucle for il ya le champ snapshot
+         * snapshot = chaque Favourit un par un
+         * snapshot.child = les donnée sous le champ snapshot (habitId, UserPhone... )
+         * habitId = c'est l'ID de l'habit et le UserPhone c'est l'identifient unique de user qui a mis l'habit dans sa liste de favourits
+         * get_value() = c'est une fonction prédéfinie pour récuperer ce donnée
+         * toString() = pour convertir ce donné pour string
+         * */
         myRefFavorits.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
                 list_myPosts_favourits = mutableListOf<Habit>()
                 val UserDatasnap = dataSnapshot.getValue()
                 for (snapshot in dataSnapshot.children) {
@@ -191,7 +207,8 @@ class Ecran_d_accueil : AppCompatActivity() {
                         var habitId = snapshot.child("habitId").getValue().toString()
                         var userPhonefav = snapshot.child("userPhone").getValue().toString()
                         for (fav in list){
-
+                            /**
+                             * c'est un controle sur tous les champs pour récupérer juste les habit favorisé par le user connecté*/
                             if (fav.userId==habitId&& userPhone==userPhonefav ){
                                     list_myPosts_favourits.add(fav)
                             }
@@ -216,7 +233,14 @@ class Ecran_d_accueil : AppCompatActivity() {
     }
 
 
-
+    /**
+     * la fonction de boutton click pour naviger ver la page d'ajout d'un habit passent les valeurs
+     * userPhone
+     * Useremail
+     * userVille
+     * USER_ROLE
+     * pour ne pas perdre les valeurs de ces champs et pour éviter une appele à la base de donnée pour diminuer le charge sur la base !
+     * */
     fun btn_ajout_function(view: View) {
         val myToast = Toast.makeText(applicationContext, "btn is clicked", Toast.LENGTH_SHORT)
         myToast.setGravity(Gravity.LEFT, 200, 200)
@@ -228,18 +252,24 @@ class Ecran_d_accueil : AppCompatActivity() {
         intent.putExtra("userRole",USER_ROLE)
         startActivity(intent)
     }
-
+    /**
+     * boutton click pour refrech le menu d'ecran d'accueil
+     * imageButtonRefrech pour INVISIBLE == car n'est pas logique de faire un refrech sur tous les donnée en restent le boutton refrech affiché*/
     fun back_toMenu(view: View) {
         listView.adapter = PostsAdapter(this@Ecran_d_accueil, R.layout.post_item, list,userPhone,"")
         imageButtonRefrech.visibility = View.INVISIBLE;
     }
 
+    /**
+     * fonction pour afficher mes habits dans lesquels j'ai fait un upload
+     *
+     * */
     fun btnmyPosts(view: View) {
         list_myPosts = mutableListOf<Habit>()
         action="viewMyPosts"
         firstLogin=3
         for (habit in list){
-
+            /**controle pour extracter just les posts (habits) de user connecté*/
             if (habit.userPhone==userPhone){
                 list_myPosts.add(habit)
             }
@@ -249,7 +279,7 @@ class Ecran_d_accueil : AppCompatActivity() {
 
         imageButtonRefrech.visibility = View.INVISIBLE;
     }
-
+    /* buttoon clicl pour l'affichage de la liste des favourits */
     fun favouritbtn(view: View) {
 
         firstLogin=3
@@ -258,10 +288,12 @@ class Ecran_d_accueil : AppCompatActivity() {
 
         imageButtonRefrech.visibility = View.INVISIBLE;
     }
+    /*boutton click pour faire un refrech des donner si quelqun des users connectés uploqd un autre post ou bien le supprimer*/
     fun refrechData(view: View) {
         listView.adapter = PostsAdapter(this@Ecran_d_accueil, R.layout.post_item, list,userPhone,action)
         imageButtonRefrech.visibility = View.INVISIBLE;
     }
+    /*boutton click pour la décoonnection */
     fun logout_user(view: View) {
         /*fonction de firebqse pour la déconnection */
         Firebase.auth.signOut()
