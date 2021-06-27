@@ -30,38 +30,41 @@ class LoginActivity : BaseActivity() {
 
     }
 
-
+    /* la fonction pour la navigation pour ajouter un nouveau user */
     fun goToRegister(view: View) {
         Root.goToLoginActivity(this@LoginActivity, "")
     }
-
+    /* La fonction de login */
     fun login_user(view: View) {
-        //verif if email is valid
+        //vérification si l'email est valide
         if(!InputControl.isValidEmail(ed_email,this@LoginActivity)){
+            Toast.makeText(baseContext, "Email Invalid.", Toast.LENGTH_SHORT).show()
             return
         }
-        //verif if password is valid
+        //vérification si le mot de passe est valide
         if(!InputControl.isValidLengthPassword(ed_password,this@LoginActivity)){
+            Toast.makeText(baseContext, "Password Invalid.", Toast.LENGTH_SHORT).show()
             return
         }
         else{
-            // set user is logged In in the shared
-            PreferenceHelper.putIsLogIn(true,this@LoginActivity)
-            //open Main
-            // ...
+            /* instantiation de la class Firebase qui nous représente la fonctionnalité d'authentification dans firebase ] */
             auth = Firebase.auth
 
+            /* l'implémentation de l'event listener pour se connecter  */
             auth.signInWithEmailAndPassword(ed_email.text.toString(), ed_password.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
+                        // si n'y a pas des problèmes au cours d'authentification
+                            /**
+                             * après l'authentification avec firebase
+                             * navigation pour la page d'acceuil
+                             * en passent le champ Email */
                         Log.d("loginResult", "signInWithEmail:success")
-                        val user = auth.currentUser
                         val intent = Intent(this, Ecran_d_accueil::class.java)
                         intent.putExtra("Useremail", ed_email.text.toString())
                         startActivity(intent)
                     } else {
-                        // If sign in fails, display a message to the user.
+                        // (l'ajout ne fonctionne pas  expl: user login existe déja ou copure d'internet Etc..)
                         Log.w(TAG, "signInWithEmail:failure", task.exception)
                         Toast.makeText(baseContext, "Authentication failed.",
                             Toast.LENGTH_SHORT).show()

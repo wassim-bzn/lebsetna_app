@@ -37,7 +37,7 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
         val prenomTextView:TextView=view.findViewById(R.id.post_prenom)
         val imageViewtele:ImageButton=view.findViewById(R.id.call_ic)
         val imageViewEmail:ImageButton=view.findViewById(R.id.email_ic)
-        val imageViewCategory:ImageButton=view.findViewById(R.id.favouritebtn)
+        val favouritebtn:ImageButton=view.findViewById(R.id.favouritebtn)
         val imageViewfavouritebtn_checked:ImageButton=view.findViewById(R.id.favouritebtn_checked)
         val imageButtotrash:ImageButton=view.findViewById(R.id.deleteItembtn)
         var list_myPosts_favourits = mutableListOf<Favourits>()
@@ -48,13 +48,14 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
         val myRefUser = database.getReference("Users")
         if (action=="viewMyPosts"){
             imageViewfavouritebtn_checked.visibility = View.INVISIBLE;
-            imageViewCategory.visibility = View.INVISIBLE;
+            favouritebtn.visibility = View.INVISIBLE;
             imageButtotrash.visibility=View.VISIBLE
         }
+        /**
+         * on va récupérer les données de user qui a ajouté un habit */
         myRefUser.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
+                //récupérer les données de user à partir de numero de tel
                 val UserDatasnap = dataSnapshot.child(habit.userPhone.toString())
                 UserData.id = UserDatasnap.child("id").getValue().toString()
                 UserData.email = UserDatasnap.child("email").getValue().toString()
@@ -64,10 +65,12 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
                 UserData.ville = UserDatasnap.child("ville").getValue().toString()
                 UserData.role = UserDatasnap.child("role").getValue().toString()
 
-                //imageView.setImageDrawable(mCtx.resources.getDrawable(habits.photo))
+                /** instentiation de la class FirebaseStorage pour télécharger les images à partir de la base de donnée
+                 * storageRef.child == c'est pour l'acces pour l'image  */
                 var storage = FirebaseStorage.getInstance()
                 val storageRef = storage.reference
                 var imageref = storageRef.child(habit.ImageUrl.toString())
+                /* téléchargemnent de l'image et le mettre dans l'image view de l'item de liste view */
                 imageref.downloadUrl.addOnSuccessListener {Uri->
 
                     val imageURL = Uri.toString()
@@ -87,30 +90,34 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
+                // s'il ya un probleme lors du téléchargement de l'image
                 Log.w(TAG, "Failed to read User Data.", error.toException())
             }
         })
+        /* *
+        * instentiation de la page favourits et obtenir les données des habit favorisé par le user connecté
+        * imageViewfavouritebtn_checked  ==>> c'est l'image du boutton favorit en rouge si le item est favourit on l'affiche avec le coeur rouge
+        * favouritebtn ==>> c'est l'image du boutton favorit en gris si le item n'est favourit on l'affiche avec le coeur gris ;
+        * imageButtotrash.visibility=View.VISIBLE
+        * action=="viewMyPosts" ==>> c'est à dire on va afficher les habit dans la page de mes posts et il faux afficher le boutton trash non pas coeur
+        * sinon on affiche le boutton de favourits coeur rouge ou bien gris
+        *  */
         val myRefFavorits = database.getReference("Favourits")
 
         myRefFavorits.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
                 list_myPosts_favourits = mutableListOf<Favourits>()
-                val UserDatasnap = dataSnapshot.getValue()
-                //UserData=(UserDatasnap["id"],UserDatasnap["email"],UserDatasnap["firstName"],UserDatasnap["lastName"],UserDatasnap["phone"],UserDatasnap["ville"],UserDatasnap["role"])
                 for (snapshot in dataSnapshot.children) {
                   var habitIdfav = snapshot.child("habitId").getValue().toString()
                   var userPhonefav = snapshot.child("userPhone").getValue().toString()
                   if (habitIdfav==habit.userId && userPhoneNum==userPhonefav){
                       if (action=="viewMyPosts"){
                           imageViewfavouritebtn_checked.visibility = View.INVISIBLE;
-                          imageViewCategory.visibility = View.INVISIBLE;
+                          favouritebtn.visibility = View.INVISIBLE;
                           imageButtotrash.visibility=View.VISIBLE
                       }else{
                       imageViewfavouritebtn_checked.visibility = View.VISIBLE;
-                      imageViewCategory.visibility = View.INVISIBLE;
+                          favouritebtn.visibility = View.INVISIBLE;
                       imageButtotrash.visibility=View.INVISIBLE
                       }
                   }
@@ -121,7 +128,8 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
                 Log.w(TAG, "Failed to read User Data.", error.toException())
             }
         })
-
+        /*
+        * boutton pour qu'on clique sur le boutton de email il nous ramène à l'application de l'email */
         imageViewEmail.setOnClickListener(View.OnClickListener {
             Toast.makeText(context,"envoie d'un imageViewEmail!",Toast.LENGTH_LONG).show()
             var email_description=imageViewEmail.contentDescription
@@ -136,6 +144,8 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
             context.startActivity(Intent.createChooser(intent, "Choose an Email client :"))
 
         })
+        /*
+        * boutton pour qu'on clique sur le boutton de appels il nous ramène à l'application de l'appels */
         imageViewtele.setOnClickListener(View.OnClickListener {
             Toast.makeText(context,"envoie d'un imageViewtele!",Toast.LENGTH_LONG).show()
             var phone_description=imageViewtele.contentDescription
@@ -144,18 +154,20 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
             intent.data = Uri.parse(temp)
             context.startActivity(intent)
         })
-        imageViewCategory.setOnClickListener(View.OnClickListener {
+        /*
+        * boutton pour qu'on clique sur le boutton de favourits gris devien rouge et il ajout un habit dans la favourit  */
+        favouritebtn.setOnClickListener(View.OnClickListener {
             val myRef = database.getReference("Favourits")
             var favourits= Favourits(userPhoneNum,habit.userId)
             myRef.child(habit.userId.toString()+userPhoneNum).setValue(favourits).addOnSuccessListener {
                 Toast.makeText(context,"Successfully Saved favoutits ",Toast.LENGTH_SHORT).show()
                 if (action=="viewMyPosts"){
                     imageViewfavouritebtn_checked.visibility = View.INVISIBLE;
-                    imageViewCategory.visibility = View.INVISIBLE;
+                    favouritebtn.visibility = View.INVISIBLE;
                     imageButtotrash.visibility=View.VISIBLE
                 }else {
                     imageViewfavouritebtn_checked.visibility = View.VISIBLE;
-                    imageViewCategory.visibility = View.INVISIBLE;
+                    favouritebtn.visibility = View.INVISIBLE;
                     imageButtotrash.visibility = View.INVISIBLE
                 }
             }.addOnFailureListener{
@@ -163,17 +175,19 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
                 Toast.makeText(context,"Failed To save favoutits! ",Toast.LENGTH_SHORT).show()
             }
         })
+        /*
+        * boutton pour qu'on clique sur le boutton de favourits rouge devien gris et il supprime un habit de les favourits  */
         imageViewfavouritebtn_checked.setOnClickListener(View.OnClickListener {
             val myRef = database.getReference("Favourits")
             myRef.child(habit.userId.toString()+userPhoneNum).removeValue().addOnSuccessListener {
                 Toast.makeText(context,"Successfully removed favorites ",Toast.LENGTH_SHORT).show()
                 if (action=="viewMyPosts"){
                     imageViewfavouritebtn_checked.visibility = View.INVISIBLE;
-                    imageViewCategory.visibility = View.INVISIBLE;
+                    favouritebtn.visibility = View.INVISIBLE;
                     imageButtotrash.visibility=View.VISIBLE
                 }else {
                     imageViewfavouritebtn_checked.visibility = View.INVISIBLE;
-                    imageViewCategory.visibility = View.VISIBLE;
+                    favouritebtn.visibility = View.VISIBLE;
                     imageButtotrash.visibility = View.INVISIBLE
                 }
             }.addOnFailureListener{
@@ -181,6 +195,7 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
                 Toast.makeText(context,"Failed To remove favoutits! ",Toast.LENGTH_SHORT).show()
             }
         })
+        /** si on est dans la page de my posts et on clique sur le boutton de trash il faux qu'on supprime un poste de la page trash ! bien sur avec le check si oui ou non !*/
         imageButtotrash.setOnClickListener(View.OnClickListener {
             val dialogClickListener =
                 DialogInterface.OnClickListener { dialog, which ->
@@ -189,9 +204,17 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
                             val myRefhabit = database.getReference("habits")
                             myRefhabit.child(habit.userId.toString()).removeValue().addOnSuccessListener {
                                 Toast.makeText(context,"Successfully removed habit ",Toast.LENGTH_SHORT).show()
-                                imageViewfavouritebtn_checked.visibility = View.INVISIBLE;
-                                imageViewCategory.visibility = View.INVISIBLE;
+                                imageViewfavouritebtn_checked.visibility = View.INVISIBLE
+                                favouritebtn.visibility = View.INVISIBLE
                                 imageButtotrash.visibility=View.INVISIBLE
+                                imageView.visibility=View.INVISIBLE
+                                titreTextView.visibility=View.INVISIBLE
+                                adresseTextView.visibility=View.INVISIBLE
+                                nomTextView.visibility=View.INVISIBLE
+                                prenomTextView.visibility=View.INVISIBLE
+                                imageViewtele.visibility=View.INVISIBLE
+                                imageViewEmail.visibility=View.INVISIBLE
+
                             }.addOnFailureListener{
 
                                 Toast.makeText(context,"Failed To remove favoutits! ",Toast.LENGTH_SHORT).show()
@@ -201,7 +224,7 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
                         }
                     }
                 }
-
+            /* affichage d'un popup pour le choix si oui on supprime ou non*/
             val builder: AlertDialog.Builder = AlertDialog.Builder(context)
             builder.setMessage("Are you sure you want to delete this item?").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show()

@@ -6,7 +6,8 @@ import com.example.pfe.R
 import com.example.pfe.common.PreferenceHelper
 import com.example.pfe.common.Root.Companion.goToLoginActivity
 import com.example.pfe.common.Root.Companion.goToMainActivity
-
+/**
+ * c'est un classe qu'elle va etre appeler au démarrage de l'applciation */
 class SplashScreenActivity : BaseActivity() {
     private val SPLASH_DISPLAY_LENGTH:Long = 1000
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,11 +34,14 @@ class SplashScreenActivity : BaseActivity() {
     fun startApp() {
         //notification on background
         var user= PreferenceHelper.getUser(this)
-
+        /**
+         * si le user est déja connecté il faux le ramener à la page de d'accueil  */
         if(user!=null ) {
             goToMainActivity(this@SplashScreenActivity)
         }
         else{
+            /**
+             * si le user n'est pas connecté il faux le ramener à la page de login  */
             goToLoginActivity(this@SplashScreenActivity,"")
         }
 
