@@ -9,7 +9,6 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pfe.adapter.PostsAdapter
 import com.example.pfe.common.Root
-import com.example.pfe.model.Favourits
 import com.example.pfe.model.Habit
 import com.example.pfe.model.UserModel
 import com.example.pfe.ui.activities.adding_post
@@ -48,9 +47,9 @@ class Ecran_d_accueil : AppCompatActivity() {
         btn_ajout= findViewById(R.id.btn_ajout_post)
         btnmyPostsid= findViewById(R.id.btnmyPostsid)
         /*recevoir de la variable email a partir de la page de login */
-        var bundle: Bundle? = intent.extras
+        val bundle: Bundle? = intent.extras
         if (bundle!!.getString("Useremail")!=null){
-        Useremail = bundle!!.getString("Useremail").toString()
+        Useremail = bundle.getString("Useremail").toString()
         }
         /*dans le cas de login on ne passe pas les variables phone, role car on va le récuprer à partir de la base de donnée (myRefUser.addValueEventListener)
         * mais si on va y aller à la page add poste qu'elle est une autre activity on va tout d'abord envoyer ces donner (phone , Role ..)
@@ -63,10 +62,10 @@ class Ecran_d_accueil : AppCompatActivity() {
         * overrided_Login_number=True c'est une cas lorsque le user se connecte pour la 1ere fois et il va sur une autre page d'ajout habit par example le listener il va détecter qu'on est dans firstlogin=2 ou bien firstlogin=3 donc dans ce cas il va pas afficher les données de nouveau
         * donc overrided_Login_number =True nous informe qu'il faux faire un import ded données de nouveaux lorsqu'on est pas dans firstlogin=1 (on n'est pas connecté pour la 1ere fois)
         *  */
-        userVille = bundle!!.getString("userVille").toString()
-        if (bundle!!.getString("userPhone")!=null){
-            userPhone = bundle!!.getString("userPhone").toString()
-            USER_ROLE = bundle!!.getString("userRole").toString()
+        userVille = bundle.getString("userVille").toString()
+        if (bundle.getString("userPhone")!=null){
+            userPhone = bundle.getString("userPhone").toString()
+            USER_ROLE = bundle.getString("userRole").toString()
             overrided_Login_number="True"
         }
         firstLogin=1
@@ -77,7 +76,7 @@ class Ecran_d_accueil : AppCompatActivity() {
 
         val myRefHabit = database.getReference("habits")
         val myRefUser = database.getReference("Users")
-        imageButtonRefrech.visibility = View.INVISIBLE;
+        imageButtonRefrech.visibility = View.INVISIBLE
         /*récupération des données de User */
         myRefUser.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -104,7 +103,7 @@ class Ecran_d_accueil : AppCompatActivity() {
                         userPhone=UserData.phone
                         userVille=UserData.ville
                         USER_ROLE=UserData.role
-                        imageButtonRefrech.visibility = View.INVISIBLE;
+                        imageButtonRefrech.visibility = View.INVISIBLE
                         if (USER_ROLE=="Professional"){
                              btn_ajout.visibility=View.VISIBLE
                             btnmyPostsid.visibility=View.VISIBLE
@@ -148,11 +147,11 @@ class Ecran_d_accueil : AppCompatActivity() {
                 list = mutableListOf<Habit>()
                 val UserDatasnap = dataSnapshot.getValue()
                 for (snapshot in dataSnapshot.children) {
-                    var Name = snapshot.child("name").getValue().toString()
-                    var description = snapshot.child("description").getValue().toString()
-                    var ImageUrl = snapshot.child("imageUrl").getValue().toString()
-                    var userId = snapshot.child("userId").getValue().toString()
-                    var userPhone = snapshot.child("userPhone").getValue().toString()
+                    val Name = snapshot.child("name").getValue().toString()
+                    val description = snapshot.child("description").getValue().toString()
+                    val ImageUrl = snapshot.child("imageUrl").getValue().toString()
+                    val userId = snapshot.child("userId").getValue().toString()
+                    val userPhone = snapshot.child("userPhone").getValue().toString()
                     /**
                      * on va créer une liste des habits pour qu'on puisse les afiicher dans la listview (page d'accueil)*/
                     list.add(Habit(Name, description, userId, ImageUrl, userPhone))
@@ -166,17 +165,17 @@ class Ecran_d_accueil : AppCompatActivity() {
                 if (firstLogin==1 || overrided_Login_number=="True"){
                     //post adapter= c'est une class pour afficher les données qu'on a récupérer de la base
                     listView.adapter = PostsAdapter(this@Ecran_d_accueil, R.layout.post_item, list,userPhone,action)
-                    imageButtonRefrech.visibility = View.INVISIBLE;
+                    imageButtonRefrech.visibility = View.INVISIBLE
                     firstLogin=2
                     overrided_Login_number="False"
                 }else if (firstLogin==2){
-                    imageButtonRefrech.visibility = View.VISIBLE;
+                    imageButtonRefrech.visibility = View.VISIBLE
                     Toast.makeText(this@Ecran_d_accueil, "Habit data list has been changed ! refrech to see the latest posts ", Toast.LENGTH_LONG).show()
 
                 }
                 else if (firstLogin==3){
                     Toast.makeText(this@Ecran_d_accueil, "Habit data list has been changed ! back to menu if you want to see the latest posts ", Toast.LENGTH_LONG).show()
-                    imageButtonRefrech.visibility = View.INVISIBLE;
+                    imageButtonRefrech.visibility = View.INVISIBLE
                 }
                 Log.d(TAG, "Value is: $UserDatasnap")
             }
@@ -204,8 +203,8 @@ class Ecran_d_accueil : AppCompatActivity() {
                 val UserDatasnap = dataSnapshot.getValue()
                 for (snapshot in dataSnapshot.children) {
                     if (snapshot.child("userPhone").getValue() == userPhone) {
-                        var habitId = snapshot.child("habitId").getValue().toString()
-                        var userPhonefav = snapshot.child("userPhone").getValue().toString()
+                        val habitId = snapshot.child("habitId").getValue().toString()
+                        val userPhonefav = snapshot.child("userPhone").getValue().toString()
                         for (fav in list){
                             /**
                              * c'est un controle sur tous les champs pour récupérer juste les habit favorisé par le user connecté*/
