@@ -87,7 +87,7 @@
         android:orientation="vertical">
 
         <TextView
-                android:id="@+id/post_category"
+                android:id="@+id/favoris_textview"
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|top"

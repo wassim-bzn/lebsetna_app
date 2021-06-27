@@ -255,8 +255,12 @@ class Ecran_d_accueil : AppCompatActivity() {
      * boutton click pour refrech le menu d'ecran d'accueil
      * imageButtonRefrech pour INVISIBLE == car n'est pas logique de faire un refrech sur tous les donnée en restent le boutton refrech affiché*/
     fun back_toMenu(view: View) {
-        listView.adapter = PostsAdapter(this@Ecran_d_accueil, R.layout.post_item, list,userPhone,"")
-        imageButtonRefrech.visibility = View.INVISIBLE;
+        val intent = Intent(this, Ecran_d_accueil::class.java)
+        intent.putExtra("Useremail", Useremail )
+        intent.putExtra("userPhone", userPhone)
+        intent.putExtra("userVille", userVille)
+        intent.putExtra("userRole", USER_ROLE)
+        startActivity(intent)
     }
 
     /**
@@ -289,8 +293,12 @@ class Ecran_d_accueil : AppCompatActivity() {
     }
     /*boutton click pour faire un refrech des donner si quelqun des users connectés uploqd un autre post ou bien le supprimer*/
     fun refrechData(view: View) {
-        listView.adapter = PostsAdapter(this@Ecran_d_accueil, R.layout.post_item, list,userPhone,action)
-        imageButtonRefrech.visibility = View.INVISIBLE;
+        val intent = Intent(this, Ecran_d_accueil::class.java)
+        intent.putExtra("Useremail", Useremail )
+        intent.putExtra("userPhone", userPhone)
+        intent.putExtra("userVille", userVille)
+        intent.putExtra("userRole", USER_ROLE)
+        startActivity(intent)
     }
     /*boutton click pour la décoonnection */
     fun logout_user(view: View) {

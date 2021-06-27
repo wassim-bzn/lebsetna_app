@@ -34,6 +34,7 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
         val titreTextView: TextView =view.findViewById(R.id.post_title)
         val adresseTextView:TextView=view.findViewById(R.id.post_address)
         val nomTextView:TextView=view.findViewById(R.id.post_nom)
+        val favoris_textview:TextView=view.findViewById(R.id.favoris_textview)
         val prenomTextView:TextView=view.findViewById(R.id.post_prenom)
         val imageViewtele:ImageButton=view.findViewById(R.id.call_ic)
         val imageViewEmail:ImageButton=view.findViewById(R.id.email_ic)
@@ -107,6 +108,8 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
         myRefFavorits.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 list_myPosts_favourits = mutableListOf<Favourits>()
+                val UserDatasnap = dataSnapshot.getValue()
+                //UserData=(UserDatasnap["id"],UserDatasnap["email"],UserDatasnap["firstName"],UserDatasnap["lastName"],UserDatasnap["phone"],UserDatasnap["ville"],UserDatasnap["role"])
                 for (snapshot in dataSnapshot.children) {
                   var habitIdfav = snapshot.child("habitId").getValue().toString()
                   var userPhonefav = snapshot.child("userPhone").getValue().toString()
@@ -214,6 +217,7 @@ class PostsAdapter(var mCtx:Context, var resource:Int, var items: MutableList<Ha
                                 prenomTextView.visibility=View.INVISIBLE
                                 imageViewtele.visibility=View.INVISIBLE
                                 imageViewEmail.visibility=View.INVISIBLE
+                                favoris_textview.visibility=View.INVISIBLE
 
                             }.addOnFailureListener{
 
